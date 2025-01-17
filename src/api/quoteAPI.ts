@@ -10,3 +10,11 @@ export const getRandomQuote = async (): Promise<Quote> => {
     
     return data as Quote;
   }
+
+  export const randomQuote = async () => {
+    const q = document.createElement("div");
+    q.classList.add("quote");
+    const quote = await getRandomQuote();
+    q.innerHTML = `${quote.sentence} - ${quote.character.name}`;
+    return q;
+};

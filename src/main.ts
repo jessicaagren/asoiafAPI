@@ -1,5 +1,5 @@
 import { displayCharacterDetails, getAsoiafCharacterNameByID, getCharacterByExactName, searchCharactersParallel } from './api/asoiafAPI';
-import { getRandomQuote } from './api/quoteAPI';
+import { getRandomQuote, randomQuote } from './api/quoteAPI';
 import './styles/main.scss';
 
 const asoiafList = document.getElementById("app") as HTMLElement;
@@ -16,5 +16,7 @@ for (let i = 1; i < 6; i++) {
 console.log("Hittade karaktärer:", await searchCharactersParallel("Stark"));
 
 displayCharacterDetails("Grisella");
+
+asoiafList.appendChild(await randomQuote());
 
 console.log(await getRandomQuote());
