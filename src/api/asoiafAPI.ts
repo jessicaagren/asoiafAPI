@@ -1,6 +1,6 @@
 import AsoiafCharacter from "../types/asoiafAPI";
 
-export const rooturl = "https://www.anapioficeandfire.com/api/";
+const rooturl = "https://www.anapioficeandfire.com/api/";
 
 // https://www.anapioficeandfire.com/api/characters?name=NAMN
 
