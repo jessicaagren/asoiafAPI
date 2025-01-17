@@ -67,7 +67,7 @@ export const getCharacterByExactName = async (name: string): Promise<AsoiafChara
     }
   };
 
-  export const displayCharacterDetails = async (name: string) => {
+  export const displayCharacterDetailsInConsole = async (name: string) => {
     const character = await getCharacterByExactName(name);
     
     if (character) {
@@ -84,3 +84,29 @@ export const getCharacterByExactName = async (name: string): Promise<AsoiafChara
       console.log("Ingen karaktär hittades med det namnet.");
     }
   };
+
+  export const displayCharacterDetails = async (name: string) => {
+    const character = await getCharacterByExactName(name);
+
+    const container = document.getElementById("character-details");
+    if (!container) {
+        console.error("Ingen container hittades för att visa karaktärsdetaljerna.");
+        return;
+    }
+
+    if (character) {
+        container.innerHTML = `
+            <h2>${character.name}</h2>
+            <p><strong>Hus:</strong> ${Array.isArray(character.allegiances) && character.allegiances.length > 0 ? character.allegiances.join(', ') : "Ingen"}</p>
+            <p><strong>Böcker:</strong> ${Array.isArray(character.books) && character.books.length > 0 ? character.books.join(', ') : "Ingen"}</p>
+            <p><strong>Född:</strong> ${character.born || "Okänd"}</p>
+            <p><strong>Kultur:</strong> ${character.culture || "Okänd"}</p>
+            <p><strong>Död:</strong> ${character.died || "Lever"}</p>
+            <p><strong>Titlar:</strong> ${Array.isArray(character.titles) && character.titles.length > 0 ? character.titles.join(', ') : "Ingen"}</p>
+            <p><strong>Spelad av:</strong> ${Array.isArray(character.playedBy) && character.playedBy.length > 0 ? character.playedBy.join(', ') : "Ingen"}</p>
+            <p><strong>TV-serier:</strong> ${Array.isArray(character.tvSeries) && character.tvSeries.length > 0 ? character.tvSeries.join(', ') : "Ingen"}</p>
+        `;
+    } else {
+        container.innerHTML = "<p>Ingen karaktär hittades med det namnet.</p>";
+    }
+};
