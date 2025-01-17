@@ -1,5 +1,5 @@
 import { displayCharacterDetails, getAsoiafCharacterNameByID, getCharacterByExactName, searchCharactersParallel } from './api/asoiafAPI';
-import { getRandomQuote, randomQuote } from './api/quoteAPI';
+import { randomQuote, randomQuoteName } from './api/quoteAPI';
 import './styles/main.scss';
 
 const app = document.getElementById("app") as HTMLElement;
@@ -13,10 +13,10 @@ console.log(await getCharacterByExactName(`Jon Snow`));
   app.appendChild(li);
 // }
 
-// console.log("Hittade karaktärer:", await searchCharactersParallel("Stark"));
+console.log("Hittade karaktärer:", await searchCharactersParallel("Sansa"));
 
-displayCharacterDetails(`${await getAsoiafCharacterNameByID(randomID)}`);
 
 app.appendChild(await randomQuote());
 
-console.log(await getRandomQuote());
+displayCharacterDetails(randomQuoteName);
+displayCharacterDetails(`${await getAsoiafCharacterNameByID(randomID)}`);

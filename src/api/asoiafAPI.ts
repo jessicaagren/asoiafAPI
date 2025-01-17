@@ -67,35 +67,36 @@ export const getCharacterByExactName = async (name: string): Promise<AsoiafChara
     }
   };
 
-  export const displayCharacterDetailsInConsole = async (name: string) => {
-    const character = await getCharacterByExactName(name);
+//   export const displayCharacterDetailsInConsole = async (name: string) => {
+//     const character = await getCharacterByExactName(name);
     
-    if (character) {
-      console.log("Namn:", character.name);
-      console.log("Hus:", Array.isArray(character.allegiances) && character.allegiances.length > 0 ? character.allegiances.join(', ') : "Ingen");
-      console.log("Böcker:", Array.isArray(character.books) && character.books.length > 0 ? character.books.join(', ') : "Ingen");
-      console.log("Född:", character.born);
-      console.log("Kultur:", character.culture);
-      console.log("Död:", character.died || "Lever");
-      console.log("Titlar:", Array.isArray(character.titles) && character.titles.length > 0 ? character.titles.join(', ') : "Ingen");
-      console.log("Spelad av:", Array.isArray(character.playedBy) && character.playedBy.length > 0 ? character.playedBy.join(', ') : "Ingen");
-      console.log("TV-serier:", Array.isArray(character.tvSeries) && character.tvSeries.length > 0 ? character.tvSeries.join(', ') : "Ingen");
-    } else {
-      console.log("Ingen karaktär hittades med det namnet.");
-    }
-  };
+//     if (character) {
+//       console.log("Namn:", character.name);
+//       console.log("Hus:", Array.isArray(character.allegiances) && character.allegiances.length > 0 ? character.allegiances.join(', ') : "Ingen");
+//       console.log("Böcker:", Array.isArray(character.books) && character.books.length > 0 ? character.books.join(', ') : "Ingen");
+//       console.log("Född:", character.born);
+//       console.log("Kultur:", character.culture);
+//       console.log("Död:", character.died || "Lever");
+//       console.log("Titlar:", Array.isArray(character.titles) && character.titles.length > 0 ? character.titles.join(', ') : "Ingen");
+//       console.log("Spelad av:", Array.isArray(character.playedBy) && character.playedBy.length > 0 ? character.playedBy.join(', ') : "Ingen");
+//       console.log("TV-serier:", Array.isArray(character.tvSeries) && character.tvSeries.length > 0 ? character.tvSeries.join(', ') : "Ingen");
+//     } else {
+//       console.log("Ingen karaktär hittades med det namnet.");
+//     }
+//   };
 
   export const displayCharacterDetails = async (name: string) => {
     const character = await getCharacterByExactName(name);
 
-    const container = document.getElementById("character-details");
+    const container = document.getElementById("character-details") as HTMLDivElement;
     if (!container) {
         console.error("Ingen container hittades för att visa karaktärsdetaljerna.");
         return;
     }
 
+    const characterDiv = document.createElement("div") as HTMLDivElement;
     if (character) {
-        container.innerHTML = `
+        characterDiv.innerHTML = `
             <h2>${character.name}</h2>
             <p><strong>Hus:</strong> ${Array.isArray(character.allegiances) && character.allegiances.length > 0 ? character.allegiances.join(', ') : "Ingen"}</p>
             <p><strong>Böcker:</strong> ${Array.isArray(character.books) && character.books.length > 0 ? character.books.join(', ') : "Ingen"}</p>
@@ -107,6 +108,7 @@ export const getCharacterByExactName = async (name: string): Promise<AsoiafChara
             <p><strong>TV-serier:</strong> ${Array.isArray(character.tvSeries) && character.tvSeries.length > 0 ? character.tvSeries.join(', ') : "Ingen"}</p>
         `;
     } else {
-        container.innerHTML = "<p>Ingen karaktär hittades med det namnet.</p>";
+        characterDiv.innerHTML = "<p>Ingen karaktär hittades med det namnet.</p>";
     }
+    container.appendChild(characterDiv);
 };
