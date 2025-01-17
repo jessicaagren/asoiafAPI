@@ -9,12 +9,12 @@ export const getRandomQuote = async (): Promise<Quote> => {
     const data = await response.json() as Quote;
     
     return data as Quote;
-  }
+}
 
-  export const randomQuote = async () => {
+export const randomQuote = async () => {
     const q = document.createElement("div");
     q.classList.add("quote");
     const quote = await getRandomQuote();
-    q.innerHTML = `${quote.sentence} - ${quote.character.name}`;
+    q.innerHTML = `<p>${quote.sentence}</p> <p>-</p> <p>${quote.character.name}</p>`;
     return q;
-};
+}
